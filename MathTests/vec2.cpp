@@ -55,7 +55,7 @@ float magnitude(const vec2 &v)
 {
 	return (sqrt((v.x*v.x) + (v.y*v.y)));
 }
-//bool operator==(const vec2 & lhs, const vec2 & rhs)
-//{
-//	return lhs.x == rhs.x && lhs.y == rhs.y;
-//}
+bool operator==(const vec2 & lhs, const vec2 & rhs)
+{
+	return lhs.x == rhs.x && lhs.y == rhs.y;
+}
