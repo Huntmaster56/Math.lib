@@ -111,6 +111,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="test.h" />
+    <ClInclude Include="vec2.h" />
+    <ClInclude Include="vec3.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Test.cpp" />
