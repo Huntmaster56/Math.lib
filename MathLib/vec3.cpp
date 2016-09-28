@@ -14,32 +14,32 @@ vec3 operator-(const vec3 & lhs, const vec3 & rhs)
 
 vec3 operator*(const vec3 &lhs, float rhs)
 {
-	vec3{ lhs.x*rhs, lhs.y*rhs, lhs.z*rhs };
+	return vec3{ lhs.x*rhs, lhs.y*rhs, lhs.z*rhs };
 }
 
 vec3 operator*(float rhs, const vec3 &lhs)
 {
-	vec3{ rhs*lhs.x, rhs*lhs.y, rhs*lhs.z };
+	return vec3{ rhs*lhs.x, rhs*lhs.y, rhs*lhs.z };
 }
 
 vec3 operator/(const vec3 &lhs, float rhs)
 {
-	vec3{ lhs.x / rhs, lhs.y / rhs, lhs.z / rhs };
+	return vec3{ lhs.x / rhs, lhs.y / rhs, lhs.z / rhs };
 }
 
 vec3 operator/(float rhs, const vec3 &lhs)
 {
-	vec3{ rhs / lhs.x, rhs / lhs.y, rhs / lhs.z };
+	return vec3{ rhs / lhs.x, rhs / lhs.y, rhs / lhs.z };
 }
 
 vec3 operator+(const vec3 &v)
 {
-	vec3{ +v.x, +v.y, +v.z };
+	return vec3{ +v.x, +v.y, +v.z };
 }
 
 vec3 operator-(const vec3 &v)
 {
-	vec3{ -v.x, -v.y, -v.z };
+	return vec3{ -v.x, -v.y, -v.z };
 }
 
 vec3 operator+=(vec3 & lhs, const vec3 & rhs)
