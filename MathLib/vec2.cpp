@@ -90,3 +90,61 @@ vec2 fromAngle(float a)
 {
 	return vec2{ cos(a), sin(a) };
 }
+
+/////////////////////////////////////
+/////////////////////////////////////
+
+vec2 lerp(const vec2 start, const vec2 end, const vec2 alpha)
+{
+	vec2 retval;
+	return (1 - alpha) * start + (alpha)* end;
+	return alpha *(end - start) + start;
+	return retval;
+}
+
+float quadBezier(float start, float mid, float end, float alpha)
+{
+	return
+		lerp(lerp(start, mid, alpha),
+			lerp(mid, end, alpha), alpha);
+}
+
+float hermitSpline(float start, float s_tan, float end, float e_tan, float alpha)
+{
+	float tsq = alpha*alpha;
+	float tcub = tsq * alpha;
+	float h00 = 2 * tcub + 3 * tsq + 1;
+	float h01 = -2 * tcub + 3 * tsq;
+	float h10 = tcub - 2 * tsq + alpha;
+	float h11 = tcub - tsq;
+	float point = h00*start + h10*s_tan + h01*end + h11 *e_tan;
+	return point;
+}
+
+float cardinalSpline(float start, float mid, float end, float tightness, float alpha)
+{
+	float tan0 = (mid - start)*tightness;
+	float tan1 = (end - mid) * tightness;
+	float tsq = alpha*alpha;
+	float tcub = tsq * alpha;
+	float h00 = 2 * tcub + 3 * tsq + 1;
+	float h01 = -2 * tcub + 3 * tsq;
+	float h10 = tcub - 2 * tsq + alpha;
+	float h11 = tcub - tsq;
+	float point = h00*start + h10*tan0 + h01 *mid + h11 * tan1;
+	return point;
+}
+
+float catRoomSpline(float start, float mid, float end, float alpha)
+{
+	float tan0 = (mid - start)*.5;
+	float tan1 = (end - mid) * .5;
+	float tsq = alpha*alpha;
+	float tcub = tsq * alpha;
+	float h00 = 2 * tcub + 3 * tsq + 1;
+	float h01 = -2 * tcub + 3 * tsq;
+	float h10 = tcub - 2 * tsq + alpha;
+	float h11 = tcub - tsq;
+	float point = h00*start + h10*tan0 + h01 *mid + h11 * tan1;
+	return point;
+}

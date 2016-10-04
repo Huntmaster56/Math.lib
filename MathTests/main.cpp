@@ -35,7 +35,15 @@ int main()
 	assert(fequals(dot(vec2{ 5,4 }, vec2{ 0,1 }), 4));
 	assert(fequals(dot(vec2{ 5,4 }, vec2{ 1,0 }), 5));
 
-	fequals(angleBetween(vec2{ 0,1 }, vec2{ 0,1 }), deg2rad(45));
+//	fequals(angleBetween(vec2{ 0,1 }, vec2{ 0,1 }), deg2rad(45));
+
+	assert(fequals(lerp(.23, 124, 0), .23));
+	assert(fequals(lerp(.23, 124, 0), 124));
+	assert(fequals(lerp(0, 1, .5f), .5f));
+
+	assert(fequals(quadBezier(15, 40, 21, 0), 15));
+	assert(fequals(quadBezier(15, 40, 21, 1), 21));
+
 	return 0;
 
 
