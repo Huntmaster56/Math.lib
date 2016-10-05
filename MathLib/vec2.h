@@ -30,12 +30,12 @@ vec2 fromAngle(float a);
 
 /////////////////////////////////////
 /////////////////////////////////////
-vec2 lerp(const vec2 start, const vec2 end, const vec2 alpha);
+vec2 lerp(const vec2 &start, const vec2 &end, float alpha);
 
-vec2 quadBezier(const vec2 start, const vec2 mid, const vec2 end, const vec2 alpha);
+vec2 quadBezier(const vec2 start, const vec2 mid, const vec2 end, float alpha);
 
-vec2 hermitSpline(const vec2 start, const vec2 s_tan, const vec2 end, const vec2 e_tan, const vec2 alpha);
+vec2 hermitSpline(const vec2 start, const vec2 s_tan, const vec2 end, const vec2 e_tan, float alpha);
 
-vec2 cardinalSpline(const vec2 start, const vec2 mid, const vec2 end, const vec2 tightness, const vec2 alpha);
+vec2 cardinalSpline(const vec2 start, const vec2 mid, const vec2 end, const vec2 tightness, float alpha);
 
-vec2 catRoomSpline(const vec2 start, const vec2 mid, const vec2 end, const vec2 alpha);
+vec2 catRoomSpline(const vec2 start, const vec2 mid, const vec2 end, float alpha);

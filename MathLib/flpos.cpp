@@ -54,7 +54,7 @@ float bounceFlip(float x)
 	return 1 - bounce(x);
 }
 
-float parabFlip(float x)
-{
-
-}
+//float parabFlip(float x)
+//{
+//
+//}

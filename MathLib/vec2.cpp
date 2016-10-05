@@ -94,19 +94,17 @@ vec2 fromAngle(float a)
 /////////////////////////////////////
 /////////////////////////////////////
 
-vec2 lerp(const vec2 start, const vec2 end, const vec2 alpha)
+vec2 lerp(const vec2 &start, const vec2 &end, float alpha)
 {
-	vec2 retval;
-	return (1 - alpha) * start + (alpha)* end;
-	return alpha *(end - start) + start;
-	return retval;
+	return (1 - alpha)* start + (alpha)* end;
+	return alpha *(end - start) + start;	
 }
 
-float quadBezier(float start, float mid, float end, float alpha)
+vec2 quadBezier(vec2 start, vec2 mid, vec2 end, float alpha)
 {
-	return
-		lerp(lerp(start, mid, alpha),
-			lerp(mid, end, alpha), alpha);
+	vec2 mid1 = lerp(start, mid, alpha);
+	vec2 mid2 = lerp(mid, end, alpha);
+	return lerp(mid1, mid2, alpha);
 }
 
 float hermitSpline(float start, float s_tan, float end, float e_tan, float alpha)

@@ -119,9 +119,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Rigidbody.cpp" />
+    <ClCompile Include="SpaceshipController.cpp" />
+    <ClCompile Include="SpaceshipLocamotion.cpp" />
     <ClCompile Include="Transform.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Rigidbody.h" />
+    <ClInclude Include="SpaceshipController.h" />
+    <ClInclude Include="SpaceshipLocomotive.h" />
     <ClInclude Include="Transform.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

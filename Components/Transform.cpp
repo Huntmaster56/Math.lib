@@ -1,21 +1,32 @@
 #include "Transform.h"
 #include "sfwdraw.h"
 
-using namespace sfw;
-Transform::Transform() : facing(0), position({ 0,0 }), scale({28,8})
+Transform::Transform(float x, float y, float w, float h, float a)
 {
-		//position.x = 0;
-		//position.y = 0;
-		//scale.x = 28;
-		//scale.y = 8;
+	position.x = x;
+	position.y = y;
+
+	scale.x = w;
+	scale.y = h;
+
+	facing = a;
 }
 
-Transform::Transform(float x, float y, float w, float h, float a)
-		  : position{ x,y }, scale{ w,h }, facing{ a }
-{
-	//position.x = x;
-	//position.y = y;
-}
+
+using namespace sfw;
+//Transform::Transform() : facing(0), position({ 0,0 }), scale({28,8})
+//{
+//		//position.x = 0;
+//		//position.y = 0;
+//		//scale.x = 28;
+//		//scale.y = 8;
+//}
+
+//Transform::Transform(float x, float y, float w, float h, float a)
+//{
+//	position.x = x;
+//	position.y = y;
+//}
 
 vec2 Transform::getDirection()
 {
