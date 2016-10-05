@@ -9,7 +9,7 @@
 using namespace sfw;
 void main()
 {
-	float SCREEN_WIDTH = 400, SCREEN_HEIGHT = 400;
+	float SCREEN_WIDTH = 600, SCREEN_HEIGHT = 700;
 	sfw::initContext(SCREEN_WIDTH, SCREEN_HEIGHT);
 	sfw::initContext();
 	float W = 1200, H = 1200;
@@ -40,7 +40,7 @@ void main()
 		 mid   = {   0, 1100 };
 
 	Transform playerTransform(200, 200);
-	playerTransform.scale = { 5,5 };
+	playerTransform.scale = { 3,3 };
 	Rigidbody playerRigidbody;
 	playerRigidbody.velocity = vec2{ 0,0 };
 
@@ -52,15 +52,6 @@ void main()
 		//sfw::drawCircle(player.x, player.y, 5.f);
 
 		float deltaTime = sfw::getDeltaTime();
-
-		//if (sfw::getKey('W')) playerRigidbody.velocity.y += 10.0f;
-		//if (sfw::getKey('S')) playerRigidbody.velocity.y -= 10.0f;
-		//if (sfw::getKey('A')) playerRigidbody.velocity.x -= 10.0f;
-		//if (sfw::getKey('D')) playerRigidbody.velocity.x += 10.0f;
-
-		//if (sfw::getKey('Q')) playerRigidbody.angularVelocity += 10.0f;
-		//if (sfw::getKey('E')) playerRigidbody.angularVelocity -= 10.0f;
-
 		if (playerTransform.position.x > SCREEN_WIDTH)
 			playerTransform.position.x = 0.0f;
 		else if (playerTransform.position.x < 0.0f)
@@ -74,12 +65,13 @@ void main()
 ///////////////////////////////////////////////////////////////
 
 		playerCtrl.update(playerLoco);
-		playerLoco.update(playerRigidbody, deltaTime);
+		playerLoco.update(playerTransform, playerRigidbody);
 		playerRigidbody.integrate(playerTransform, deltaTime);
 
 ///////////////////////////////////////////////////////////////
 
 		playerTransform.debugDraw();
+		playerRigidbody.debugDraw(playerTransform);
 		//for (int i = 0; i < 100; ++i)
 		//{
 		//	float x1 = i / 100.f;

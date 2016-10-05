@@ -28,7 +28,12 @@ using namespace sfw;
 //	position.y = y;
 //}
 
-vec2 Transform::getDirection()
+vec2 Transform::getUp() const
+{
+	return -perp(getDirection());
+}
+
+vec2 Transform::getDirection() const
 {
 	return fromAngle(facing);
 }

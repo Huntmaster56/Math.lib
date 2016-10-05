@@ -6,9 +6,11 @@ SpaceshipLocomotive::SpaceshipLocomotive()
 {
 	vertThrust = 0.0f;
 	horzThrust = 0.0f;
+	breakPower = 4.0f;
 	
-	speed = 10.0f;
-	maxSpeed = 100.0f;
+	turnSpeed = 4.0f;
+	speed = 900.0f;
+	maxSpeed = 1000.0f;
 }
 
 void SpaceshipLocomotive::doThrust(float value)
@@ -26,21 +28,33 @@ void SpaceshipLocomotive::doTurn(float value)
 //	if (sfw::getKey('E')) horzThrust += 1;
 }
 
-void SpaceshipLocomotive::update(Rigidbody &rigidbody, float deltaTime)
+void SpaceshipLocomotive::doStop(float value)
+{
+	stopAction += value;
+}
+
+void SpaceshipLocomotive::update(const Transform &trans, Rigidbody &rigidbody)
 {
 //	doThrust();
 //	doTurn();
 
-	rigidbody.acceleration.x = horzThrust * speed;
-	rigidbody.acceleration.y = vertThrust * speed;
+	rigidbody.addForce (trans.getUp() * speed * vertThrust);
+	rigidbody.addTorque(turnSpeed * horzThrust);
+	
+//	float currentSpeed = magnitude(rigidbody.velocity);
 
-	if (magnitude(rigidbody.velocity) > maxSpeed)
-	{
-		vec2 dir = normal(rigidbody.velocity);
+	rigidbody.addForce(-rigidbody.velocity * breakPower * stopAction);
+	rigidbody.addTorque(-rigidbody.angularVelocity * breakPower * stopAction);
 
-		rigidbody.velocity = dir * maxSpeed;
-	}
+	horzThrust = vertThrust = stopAction = 0;
 
-	vertThrust = 0.0f;
-	horzThrust = 0.0f;
+	//rigidbody.acceleration.x = horzThrust * speed;
+	//rigidbody.acceleration.y = vertThrust * speed;
+	//if (magnitude(rigidbody.velocity) > maxSpeed)
+	//{
+	//	vec2 dir = normal(rigidbody.velocity);
+	//	rigidbody.velocity = dir * maxSpeed;
+	//}
+	//vertThrust = 0.0f;
+	//horzThrust = 0.0f;
 }
