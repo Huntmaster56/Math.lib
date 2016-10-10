@@ -1,0 +1,25 @@
+#pragma once
+
+#include "Rigidbody.h"
+
+class SpaceshipLocomotive
+{
+	float vertThrust;
+	float horzThrust;
+	float stopAction;
+
+	float breakPower;
+	float turnSpeed;
+	float maxSpeed;
+	float speed;
+
+public:
+	SpaceshipLocomotive();
+
+	void doThrust(float value);
+	void doTurn(float value);
+
+	void doStop(float value);
+
+	void update(const Transform &trans, Rigidbody &rigidbody);
+};
