@@ -40,7 +40,7 @@ void main()
 		 mid   = {   0, 1100 };
 
 	Transform playerTransform(200, 200);
-	playerTransform.scale = { 3,3 };
+	playerTransform.m_scale = { 3,3 };
 	Rigidbody playerRigidbody;
 	playerRigidbody.velocity = vec2{ 0,0 };
 
@@ -52,15 +52,15 @@ void main()
 		//sfw::drawCircle(player.x, player.y, 5.f);
 
 		float deltaTime = sfw::getDeltaTime();
-		if (playerTransform.position.x > SCREEN_WIDTH)
-			playerTransform.position.x = 0.0f;
-		else if (playerTransform.position.x < 0.0f)
+		if (playerTransform.m_position.x > SCREEN_WIDTH)
+			playerTransform.m_position.x = 0.0f;
+		else if (playerTransform.m_position.x < 0.0f)
 			playerTransform = SCREEN_WIDTH;
 
-		if (playerTransform.position.y > SCREEN_HEIGHT)
-			playerTransform.position.y = 0.0f;
-		else if (playerTransform.position.y < 0.0f)
-			playerTransform.position.y = SCREEN_HEIGHT;
+		if (playerTransform.m_position.y > SCREEN_HEIGHT)
+			playerTransform.m_position.y = 0.0f;
+		else if (playerTransform.m_position.y < 0.0f)
+			playerTransform.m_position.y = SCREEN_HEIGHT;
 
 ///////////////////////////////////////////////////////////////
 

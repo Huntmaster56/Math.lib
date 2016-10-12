@@ -10,6 +10,10 @@ union mat3
 	vec3  &operator[](unsigned idx);
 };
 
+mat3 mat3Identity();
+//mat3 transpose(const mat3 &A);
+
+
 bool operator ==(const mat3 & A, const mat3 & B);
 bool operator !=(const mat3 & A, const mat3 & B);
 mat3 operator + (const mat3 & A, const mat3 & B);

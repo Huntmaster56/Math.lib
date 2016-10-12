@@ -1,14 +1,14 @@
 #pragma once
 #include "vec2.h"
-
+#include "mat3.h"
 
 class Transform
 {
 public:
 
-	vec2 position;
-	vec2 scale;
-	float facing;
+	vec2  m_position;
+	vec2  m_scale;
+	float m_facing;
 
 	//Transform();
 	Transform(float x = 0, float y = 0, float w = 1,
@@ -18,5 +18,7 @@ public:
 	vec2 getDirection() const;
 	void setDirection(const vec2 &dir);
 
-	void debugDraw();
+	mat3 getLocalTransform() const;
+
+	void debugDraw(const mat3 &T = mat3Identity()) const;
 };

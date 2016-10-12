@@ -53,6 +53,13 @@ mat3 operator - (const mat3 & A)
 				 A.m[8] };
 }
 
+mat3 mat3Identitiy()
+{
+	return mat3{ 1,0,0 ,0,1,0, 0,0,1 };
+}
+
+
+
 mat3 transpose(const mat3 & A)
 {
 	mat3 retval = A;
