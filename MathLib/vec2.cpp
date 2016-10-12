@@ -1,6 +1,8 @@
 #include "vec2.h"
 #include <cmath>
 #include "flpos.h"
+#include "mat2.h" 
+
 vec2 operator+(const vec2 & lhs, const vec2 & rhs)
 {
 	return vec2{ lhs.x + rhs.x, lhs.y + rhs.y };
@@ -145,4 +147,13 @@ float catRoomSpline(float start, float mid, float end, float alpha)
 	float h11 = tcub - tsq;
 	float point = h00*start + h10*tan0 + h01 *mid + h11 * tan1;
 	return point;
+}
+
+float vec2::operator[](unsigned idx) const
+{
+	return v[idx];
+}
+float & vec2::operator[](unsigned idx)
+{
+	return v[idx];
 }

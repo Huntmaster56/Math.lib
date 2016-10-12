@@ -3,6 +3,8 @@
 #include "vec2.h"
 #include "test.h"
 #include "flpos.h"
+#include "mat2.h"
+#include "mat3.h"
 
 int main()
 {
@@ -27,8 +29,25 @@ int main()
 	assert(fequals(lerp(.23, 124, 0), 124));
 	assert(fequals(lerp(0, 1, .5f), .5f));
 
-	assert(fequals(quadBezier(15, 40, 21, 0), 15));
-	assert(fequals(quadBezier(15, 40, 21, 1), 21));
+	//assert(fequals(quadBezier(15, 40, 21, 0), 15));
+	//assert(fequals(quadBezier(15, 40, 21, 1), 21));
+
+	////////////////////
+	/////
+
+//	vec2 someData;
+
+//	someData[1] == someData.y == someData.v[1];
+	
+	mat2 m0 = mat2{ 0,0,0,0 };
+
+	vec3 j = { 2,5,1 };
+
+	assert((scale(5, 1) * j == vec3{ 10,5,1 }));
+
+	assert((rotate(deg2rad(90)) * j == vec3{ -5,2,1 }));
+
+	assert((translate(0, 3)*j == vec3{ 2,8,1 }));
 
 	return 0;
 

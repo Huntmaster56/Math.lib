@@ -2,7 +2,13 @@
 
 
 
-struct vec3 { float x, y, z; };
+union vec3 
+{ 
+	struct
+	{
+		float x, y, z;
+	};
+};
 vec3 operator+(const vec3 &lhs, const vec3 &rhs);
 vec3 operator-(const vec3 &lhs, const vec3 &rhs);
 vec3 operator*(const vec3 &lhs, float rhs);
