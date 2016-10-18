@@ -9,7 +9,7 @@ SpaceshipLocomotive::SpaceshipLocomotive()
 	breakPower = 4.0f;
 	
 	turnSpeed = 4.0f;
-	speed = 900.0f;
+	speed = 300.0f;
 	maxSpeed = 1000.0f;
 }
 

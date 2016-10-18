@@ -61,3 +61,17 @@ float magnitude(const vec3 &v)
 {
 	return (sqrt((v.x*v.x) + (v.y*v.y) + (v.z*v.z)));
 }
+
+float dot(const vec3 &A, const vec3 &B)
+{
+	return A.x * B.x + A.y * B.y + A.z * B.z;
+}
+
+float  vec3::operator [](unsigned idx) const
+{
+	return v[idx];
+}
+float  &vec3::operator[](unsigned idx)
+{
+	return v[idx];
+}

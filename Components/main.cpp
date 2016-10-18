@@ -39,8 +39,17 @@ void main()
 		 end   = { 900, 800  },
 		 mid   = {   0, 1100 };
 
-	Transform playerTransform(200, 200);
+	Transform playerTransform(400, 200);
+	Transform ST1(-5, -2);
+	Transform ST2(5, -2);
+
+	ST1.m_parent = &playerTransform;
+	ST2.m_parent = &playerTransform;
+
+
 	playerTransform.m_scale = { 3,3 };
+	ST1.m_scale = { 1,1 };
+	ST1.m_scale = { 1,1 };
 	Rigidbody playerRigidbody;
 	playerRigidbody.velocity = vec2{ 0,0 };
 
@@ -70,8 +79,14 @@ void main()
 
 ///////////////////////////////////////////////////////////////
 
+		mat3 test = { 0,1,2,3,4,5,6,7,8 };
+
 		playerTransform.debugDraw();
 		playerRigidbody.debugDraw(playerTransform);
+
+		ST1.debugDraw();
+		ST2.debugDraw();
+
 		//for (int i = 0; i < 100; ++i)
 		//{
 		//	float x1 = i / 100.f;

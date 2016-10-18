@@ -11,6 +11,7 @@ int main()
 	printf("Hello World! %d", doNothing(40));
 
 
+	assert(mat3Identity() * mat3Identity() == mat3Identity());
 
 	vec2 N = normal(vec2{ 1,1 });
 	assert(N.x == N.y);
@@ -43,11 +44,13 @@ int main()
 
 	vec3 j = { 2,5,1 };
 
-	assert((scale(5, 1) * j == vec3{ 10,5,1 }));
+	
 
-	assert((rotate(deg2rad(90)) * j == vec3{ -5,2,1 }));
+	//assert((scale(5, 1) * j == vec3{ 10,5,1 }));
 
-	assert((translate(0, 3)*j == vec3{ 2,8,1 }));
+	//assert((rotate(deg2rad(90)) * j == vec3{ -5,2,1 }));
+
+	//assert((translate(0, 3)*j == vec3{ 2,8,1 }));
 
 	return 0;
 

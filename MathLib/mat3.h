@@ -6,6 +6,7 @@ union mat3
 	float m[9];      // single dimensional matrix
 	float mm[3][3];   // multidimentional matrix
 	vec3  c[3];      // column vectors
+
 	vec3  operator [](unsigned idx) const;
 	vec3  &operator[](unsigned idx);
 };
