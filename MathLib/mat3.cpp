@@ -126,12 +126,15 @@ mat3 scale(float w, float h)
 
 mat3 translate(float x, float y)
 {
-	return mat3{ {1,0,x,0,1,y,0,0,1 } };
+	return mat3{ {1,0,0,0,1,0,x,y,1 } };
 }
 
 mat3 rotate(float a)
 {
-	return mat3{ { cos(a), -sin(a), 0, sin(a), cos(a),0,0,0,1} };
+	return mat3
+	{  cos(a), sin(a), 0,
+	   -sin(a), cos(a),0,
+	   0,0,1 };
 }
 
 vec3 mat3::operator[](unsigned idx) const

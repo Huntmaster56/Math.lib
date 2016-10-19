@@ -53,23 +53,18 @@ void Transform::debugDraw(const mat3 &T) const
 	vec3 pos = L[2];
 	vec3 sgp = m_parent ? getGlobalTransform()[2] : pos;
 
-	vec3 right = L * vec3{ 1, 0, 1 };
-	vec3 up	   = L * vec3{ 0, 4, 1 };
+	vec3 right = L * vec3{ 20, 0, 1 };
+	vec3 up	   = L * vec3{ 0, 40, 1 };
+
+
+	vec2 dirEnd = m_position + getDirection() * m_scale.x * 8;
+	vec2 upEnd = m_position - perp(getDirection()) * m_scale.y * 6;
 
 	sfw::drawLine(pos.x, pos.y,
 				  right.x,		right.y, GREEN);
 
 	sfw::drawLine(pos.x, pos.y,
 				  up.x,		up.y,  BLUE);
-
-	vec2 dirEnd = m_position + getDirection() * m_scale.x * 8;
-	vec2 upEnd = m_position - perp(getDirection()) * m_scale.y * 6;
-
-	sfw::drawLine(m_position.x, m_position.y,
-		dirEnd.x, dirEnd.y, GREEN);
-
-	sfw::drawLine(m_position.x, m_position.y,
-		upEnd.x, upEnd.y, BLUE);
 
 	sfw::drawCircle(pos.x, pos.y, 12, 12, RED);
 
@@ -90,6 +85,10 @@ void Transform::debugDraw(const mat3 &T) const
 	//{
 	//	m_position += getDirection() * 5;
 	//}
+	//sfw::drawLine(m_position.x, m_position.y,
+	//	dirEnd.x, dirEnd.y, GREEN);
+	//sfw::drawLine(m_position.x, m_position.y,
+	//	upEnd.x, upEnd.y, BLUE);
 
 }
 
@@ -103,8 +102,8 @@ mat3 Transform::getGlobalTransform() const
 
 mat3 Transform::getLocalTransform() const
 {
-	mat3 S = scale(m_scale.x, m_scale.y);
 	mat3 T = translate(m_position.x, m_position.y);
+	mat3 S = scale(m_scale.x, m_scale.y);
 	mat3 R = rotate(m_facing);
 
 	return T * R * S;

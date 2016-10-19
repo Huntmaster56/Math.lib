@@ -12,19 +12,21 @@ union mat3
 };
 
 mat3 mat3Identity();
-//mat3 transpose(const mat3 &A);
+mat3 transpose(const mat3 & A);
 
 
 bool operator ==(const mat3 & A, const mat3 & B);
 bool operator !=(const mat3 & A, const mat3 & B);
+
 mat3 operator + (const mat3 & A, const mat3 & B);
 mat3 operator - (const mat3 & A, const mat3 & B);
 mat3 operator - (const mat3 & A);
-mat3 transpose(const mat3 & A);
+
 mat3 operator * (const mat3 & A, const mat3 & B);
 mat3 operator * (float S, const mat3 & A);
 mat3 operator * (float S, const mat3 & A);
 vec3 operator * (const mat3 &A, const vec3 &V);
+
 float determinate(const mat3 & A);
 //vec3 inverse(const mat3 &A);
 

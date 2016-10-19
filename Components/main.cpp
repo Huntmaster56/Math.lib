@@ -9,10 +9,8 @@
 using namespace sfw;
 void main()
 {
-	float SCREEN_WIDTH = 600, SCREEN_HEIGHT = 700;
+	float SCREEN_WIDTH = 800, SCREEN_HEIGHT = 800;
 	sfw::initContext(SCREEN_WIDTH, SCREEN_HEIGHT);
-	sfw::initContext();
-	float W = 1200, H = 1200;
 	float steps = 100;
 //	Transform trans(400, 300, 30,30, 23);
 //
@@ -35,16 +33,22 @@ void main()
 //	vec2 basis = { 40,0 };
 //	float ang_vec = 0;
 
+//sfw::initContext();
+	//float W = 1200, H = 1200;
 	vec2 start = { 200, 300  },
 		 end   = { 900, 800  },
 		 mid   = {   0, 1100 };
 
 	Transform playerTransform(400, 200);
-	Transform ST1(-5, -2);
-	Transform ST2(5, -2);
+	Transform ST1(25, 0);
+	Transform ST2(20, 0);
+	Transform ST3(15, 0);
+	Transform ST4(10, 0);
 
 	ST1.m_parent = &playerTransform;
-	ST2.m_parent = &playerTransform;
+	ST2.m_parent = &ST1;
+	ST3.m_parent = &ST2;
+	ST4.m_parent = &ST3;
 
 
 	playerTransform.m_scale = { 3,3 };
@@ -64,7 +68,7 @@ void main()
 		if (playerTransform.m_position.x > SCREEN_WIDTH)
 			playerTransform.m_position.x = 0.0f;
 		else if (playerTransform.m_position.x < 0.0f)
-			playerTransform = SCREEN_WIDTH;
+			playerTransform.m_position.x = SCREEN_WIDTH;
 
 		if (playerTransform.m_position.y > SCREEN_HEIGHT)
 			playerTransform.m_position.y = 0.0f;
@@ -86,6 +90,8 @@ void main()
 
 		ST1.debugDraw();
 		ST2.debugDraw();
+		ST3.debugDraw();
+		ST4.debugDraw();
 
 		//for (int i = 0; i < 100; ++i)
 		//{

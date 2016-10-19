@@ -25,4 +25,4 @@ vec3 operator+=(vec3 & lhs, const vec3 &rhs);
 vec3 operator-=(vec3 & lhs, const vec3 &rhs);
 float magnitude(const vec3 &v);
 float dot(const vec3 &A, const vec3 &B);
-bool operator==(const vec3 &lhs, float rhs);
+bool operator==(const vec3 &lhs, const vec3 & rhs);
