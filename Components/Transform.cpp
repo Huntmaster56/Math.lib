@@ -45,13 +45,30 @@ void Transform::setDirection(const vec2 &dir)
 	m_facing = angle(dir);
 }
 
+vec2 Transform::getGlobalPosition() const
+{
+	return getGlobalTransform()[2].xy;
+}
+vec2 Transform::getGlobalRight()	 const
+{
+	return getGlobalTransform()[1].xy;
+}
+vec2 Transform::getGlobalUp()		 const
+{
+	return getGlobalTransform()[0].xy;
+}
+float Transform::getGlobalAngle()	 const
+{
+	return angle(getGlobalRight());
+}
+
 
 void Transform::debugDraw(const mat3 &T) const
 {
 	mat3 L = T * getGlobalTransform();
 
 	vec3 pos = L[2];
-	vec3 sgp = m_parent ? getGlobalTransform()[2] : pos;
+	vec3 sgp = m_parent ? T * m_parent->getGlobalTransform()[2] : pos;
 
 	vec3 right = L * vec3{ 20, 0, 1 };
 	vec3 up	   = L * vec3{ 0, 40, 1 };

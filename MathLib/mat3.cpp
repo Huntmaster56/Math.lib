@@ -110,8 +110,20 @@ vec3 operator*(const mat3 &A, const vec3 &V)
 
 float determinate(const mat3 & A)
 {
-	return  (A.m[0] * A.m[4] * A.m[8]) + (A.m[3] * A.m[7] * A.m[2]) + (A.m[6] * A.m[1] * A.m[5]) -
-			(A.m[6] * A.m[4] * A.m[2]) - (A.m[3] * A.m[1] * A.m[8]) - (A.m[0] * A.m[7] * A.m[5]);
+	return dot(A[0], cross(A[1], A[2]));
+	//return  (A.m[0] * A.m[4] * A.m[8]) + (A.m[3] * A.m[7] * A.m[2]) + (A.m[6] * A.m[1] * A.m[5]) -
+	//		(A.m[6] * A.m[4] * A.m[2]) - (A.m[3] * A.m[1] * A.m[8]) - (A.m[0] * A.m[7] * A.m[5]);
+}
+
+mat3 inverse(const mat3 & A)
+{
+	mat3 retval;
+
+	retval[0] = cross(A[1], A[2]);
+	retval[1] = cross(A[2], A[0]);
+	retval[2] = cross(A[0], A[1]);
+
+	return 1 / determinate(A) * transpose(retval);
 }
 
 //mat3 inverse(const mat3 &A)
