@@ -7,8 +7,7 @@
 #include "SpaceshipController.h"
 #include "PlanetaryMotor.h"
 #include "PlanetaryRenderer.h"
-#include "main.h"
-
+#include "SpaceshipRenderer.h"
 using namespace sfw;
 void main()
 {
@@ -43,16 +42,18 @@ void main()
 		 mid   = {   0, 1100 };
 
 	Transform playerTransform(400, 400);
+	Rigidbody playerRigidbody;
+	SpacechipController playerCtrl;
+	SpaceshipLocomotive playerLoco;
+
 	//Transform ST1(25, 0);
 	//Transform ST2(20, 0);
 	//Transform ST3(15, 0);
 	//Transform ST4(10, 0);
-
 	//ST1.m_parent = &playerTransform;
 	//ST2.m_parent = &ST1;
 	//ST3.m_parent = &ST2;
 	//ST4.m_parent = &ST3;
-
 
 	Transform sunTransform;
 	sunTransform.m_position = vec2{ SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 };
@@ -77,13 +78,12 @@ void main()
 	moon1motor.m_rotationSpeed = 12;
 	PlanetaryRenderer moon1renderer(WHITE, 7);
 
+	Transform cameraTransform;
+
 	//playerRigidbody.velocity = vec2{ 0,0 };
 	//playerTransform.m_scale = { 3,3 };
 	//ST1.m_scale = { 1,1 };
 	//ST1.m_scale = { 1,1 };
-	Rigidbody playerRigidbody;
-	SpacechipController playerCtrl;
-	SpaceshipLocomotive playerLoco;
 	while (sfw::stepContext())
 	{
 		//if (playerTransform.m_position.x > SCREEN_WIDTH)
@@ -109,7 +109,7 @@ void main()
 		plan1RB.integrate(plan1, deltaTime);
 		sunRbody.integrate(sunTransform, deltaTime);
 
-		camera.m_position
+		cameraTransform.m_position
 			= lerp(cameraTransform.m_position,
 				playerTransform.getGlobalPosition(),
 				sfw::getDeltaTime() * 10);
@@ -124,6 +124,14 @@ void main()
 		plan1.debugDraw(camera);
 		moon1.debugDraw(camera);
 		cameraTransform.debugDraw(camera);
+		
+		playerRigidbody.debugDraw(camera, playerTransform);
+
+		sunRenderer.draw(camera, sunTransform);
+		plan1renderer.draw(camera, plan1);
+		moon1renderer.draw(camera, moon1);
+
+		//playerRender.draw(camera, playerTransform);
 
 		//mat3 test = { 0,1,2,3,4,5,6,7,8 };
 		//playerTransform.debugDraw();

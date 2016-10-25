@@ -10,5 +10,5 @@ public:
 	unsigned int color;	
 	float size;			
 
-	void draw(Transform &planetTrans);
+	void draw(const mat3& T, Transform &planetTrans);
 };
