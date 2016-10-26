@@ -41,7 +41,7 @@ void main()
 		 end   = { 900, 800  },
 		 mid   = {   0, 1100 };
 
-	Transform playerTransform(400, 400);
+	Transform playerTransform(500, 500);
 	Rigidbody playerRigidbody;
 	SpacechipController playerCtrl;
 	SpaceshipLocomotive playerLoco;
@@ -59,24 +59,24 @@ void main()
 	sunTransform.m_position = vec2{ SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 };
 	Rigidbody sunRbody;
 	PlanetaryMotor sunMotor;
-	sunMotor.m_rotationSpeed = 5;
-	PlanetaryRenderer sunRenderer(YELLOW, 100);
+	sunMotor.m_rotationSpeed = 0.5;
+	PlanetaryRenderer sunRenderer(YELLOW, 30);
 
 	Transform plan1;
-	plan1.m_position = vec2{ 150, 0 };
+	plan1.m_position = vec2{ 100, 0 };
 	plan1.m_parent = &sunTransform;
 	Rigidbody plan1RB;
 	PlanetaryMotor plan1motor;
-	plan1motor.m_rotationSpeed = 7;
-	PlanetaryRenderer plan1renderer(GREEN, 20);
+	plan1motor.m_rotationSpeed = 1;
+	PlanetaryRenderer plan1renderer(GREEN, 10);
 
 	Transform moon1;
-	moon1.m_position = vec2{ 50, 0 };
+	moon1.m_position = vec2{ 25, 0 };
 	moon1.m_parent = &plan1;
 	Rigidbody moon1RB;
 	PlanetaryMotor moon1motor;
-	moon1motor.m_rotationSpeed = 12;
-	PlanetaryRenderer moon1renderer(WHITE, 7);
+	moon1motor.m_rotationSpeed = 0.5;
+	PlanetaryRenderer moon1renderer(WHITE, 5);
 
 	Transform cameraTransform;
 
@@ -96,15 +96,17 @@ void main()
 		//	playerTransform.m_position.y = SCREEN_HEIGHT;
 		float deltaTime = sfw::getDeltaTime();
 ///////////////////////////////////////////////////////////////
-		playerCtrl.update(playerLoco);
-		playerLoco.update(playerTransform, playerRigidbody);
+		playerCtrl.update		 (playerLoco);
+		playerLoco.update		 (playerTransform, playerRigidbody);
 		playerRigidbody.integrate(playerTransform, deltaTime);
 ///////////////////////////////////////////////////////////////
 
-		sunMotor.update(sunRbody);
+		sunMotor  .update(sunRbody);
 		plan1motor.update(plan1RB);
 		moon1motor.update(moon1RB);
 
+		
+		playerRigidbody.integrate(playerTransform, deltaTime);
 		moon1RB.integrate(moon1, deltaTime);
 		plan1RB.integrate(plan1, deltaTime);
 		sunRbody.integrate(sunTransform, deltaTime);
@@ -114,52 +116,24 @@ void main()
 				playerTransform.getGlobalPosition(),
 				sfw::getDeltaTime() * 10);
 
-		mat3 proj = translate(600, 600) * scale(2, 2);
+		mat3 proj = translate(600, 600) * scale(1, 1);
 		mat3 view = inverse(cameraTransform.getGlobalTransform());
 	
 		mat3 camera = proj * view;
 
 		playerTransform.debugDraw(camera);
-		sunTransform.debugDraw(camera);
-		plan1.debugDraw(camera);
-		moon1.debugDraw(camera);
+		sunTransform.debugDraw	 (camera);
+		plan1.debugDraw			 (camera);
+		moon1.debugDraw			 (camera);
 		cameraTransform.debugDraw(camera);
 		
-		playerRigidbody.debugDraw(camera, playerTransform);
+	//	playerRigidbody.debugDraw(camera, playerTransform);
 
-		sunRenderer.draw(camera, sunTransform);
-		plan1renderer.draw(camera, plan1);
-		moon1renderer.draw(camera, moon1);
+		sunRenderer	 .draw		 (camera, sunTransform);
+		plan1renderer.draw		 (camera, plan1);
+		moon1renderer.draw		 (camera, moon1);
 
-		//playerRender.draw(camera, playerTransform);
 
-		//mat3 test = { 0,1,2,3,4,5,6,7,8 };
-		//playerTransform.debugDraw();
-		//playerRigidbody.debugDraw(playerTransform);
-		//ST1.debugDraw();
-		//ST2.debugDraw();
-		//ST3.debugDraw();
-		//ST4.debugDraw();
-		//for (int i = 0; i < 100; ++i)
-		//{
-		//	float x1 = i / 100.f;
-		//	float x2 = (i + 1) / 100.f;
-		//	//float x2 = (i + 1) / 100.f;
-		//	//float y2 = linearHalf(x2);
-		//	float y1 = quadBezier(.5f, 0, 1, x1);
-		//	float y2 = quadBezier(.5f, 0, 1, x2);
-		//	x1 *= W;
-		//	x2 *= W;
-		//	y1 *= H;
-		//	y2 *= H;
-		//	sfw::drawLine(x1,y1,x2,y2);
-		//}
-		//ang_vec += sfw::getDeltaTime();
-		//vec2 incident = fromAngle(ang_vec) * 40;
-		//float proj = dot(basis, incident);
-		//drawLine(400, 300, 400 + basis.x + basis.y, BLACK);
-		//trans.debugDraw();
-		//trans.facing += getDeltaTime();
 	}
 	sfw::termContext();
 }

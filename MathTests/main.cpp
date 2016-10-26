@@ -6,6 +6,8 @@
 #include "mat2.h"
 #include "mat3.h"
 #include "shapes.h"
+#include "collision.h"
+
 int main()
 {
 	printf("Hello World! %d", doNothing(40));
@@ -40,6 +42,11 @@ int main()
 
 	assert((scale(-1, 1) * c == Circle{ 4, 0, 5 }));
 	assert((rotate(45) * c == Circle{ 0, 0, 5 }));
+
+
+	
+
+
 
 	return 0;
 

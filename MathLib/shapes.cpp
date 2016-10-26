@@ -11,8 +11,6 @@ Circle operator*(const mat3 & T, const Circle & c)
 
 	retval.rad = mX > mY ? mX : mY;
 
-
-
 	return retval;
 	//float rad = c.rad;
 	//float xrad = magnitude(T * vec3{ rad, 0, 0 });
@@ -24,4 +22,25 @@ Circle operator*(const mat3 & T, const Circle & c)
 bool operator==(const Circle & A, const Circle & B)
 {
 	return A.pos == B.pos && fequals(A.rad, B.rad);
+}
+
+
+vec2 AABB::min() const
+{
+	return pos - he;
+}
+
+vec2 AABB::max() const
+{
+	return pos + he;
+}
+
+AABB operator*(const mat3 & T, const AABB & A)
+{
+	AABB retval = A;
+
+	retval.pos = (T * vec3{ A.pos.x,A.pos.y,1 }).xy;
+
+	retval.he = (T * vec3{ A.he.x,A.he.y,0 }).xy;
+	return retval;
 }

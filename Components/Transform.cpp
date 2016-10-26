@@ -62,29 +62,40 @@ float Transform::getGlobalAngle()	 const
 	return angle(getGlobalRight());
 }
 
+mat3 Transform::getGlobalTransform() const
+{
+	if (m_parent == nullptr)
+		return getLocalTransform();
+	else
+		return m_parent->getGlobalTransform() * getLocalTransform();
+}
+
+mat3 Transform::getLocalTransform() const
+{
+	mat3 T = translate(m_position.x, m_position.y);
+	mat3 S = scale(m_scale.x, m_scale.y);
+	mat3 R = rotate(m_facing);
+
+	return T * R * S;
+}
 
 void Transform::debugDraw(const mat3 &T) const
 {
 	mat3 L = T * getGlobalTransform();
 
 	vec3 pos = L[2];
-	vec3 sgp = m_parent ? T * m_parent->getGlobalTransform()[2] : pos;
 
 	vec3 right = L * vec3{ 20, 0, 1 };
 	vec3 up	   = L * vec3{ 0, 40, 1 };
 
+	sfw::drawCircle(pos.x, pos.y, 12, 12, RED);
+	sfw::drawLine(pos.x, pos.y, right.x, right.y, GREEN);
 
 	vec2 dirEnd = m_position + getDirection() * m_scale.x * 8;
 	vec2 upEnd = m_position - perp(getDirection()) * m_scale.y * 6;
 
-	sfw::drawLine(pos.x, pos.y,
-				  right.x,		right.y, GREEN);
-
-	sfw::drawLine(pos.x, pos.y,
-				  up.x,		up.y,  BLUE);
-
-	sfw::drawCircle(pos.x, pos.y, 12, 12, RED);
-
+	vec3 sgp = m_parent ? T * m_parent->getGlobalTransform()[2] : pos;
+	sfw::drawLine(pos.x, pos.y, up.x, up.y, BLUE);
 
 	//if (getKey(KEY_UP))
 	//{
@@ -107,21 +118,4 @@ void Transform::debugDraw(const mat3 &T) const
 	//sfw::drawLine(m_position.x, m_position.y,
 	//	upEnd.x, upEnd.y, BLUE);
 
-}
-
-mat3 Transform::getGlobalTransform() const
-{
-	if (m_parent == nullptr)
-		return getLocalTransform();
-	else
-		return m_parent->getGlobalTransform() * getLocalTransform();
-}
-
-mat3 Transform::getLocalTransform() const
-{
-	mat3 T = translate(m_position.x, m_position.y);
-	mat3 S = scale(m_scale.x, m_scale.y);
-	mat3 R = rotate(m_facing);
-
-	return T * R * S;
 }
