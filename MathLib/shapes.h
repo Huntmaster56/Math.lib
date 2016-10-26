@@ -19,7 +19,7 @@ struct AABB
 	vec2 min() const;
 	vec2 max() const;
 };
-AABB operator*(const mat3 &T, const AABB &A);
+AABB operator*(const mat3 &T, const AABB &box);
 
 struct Plane {};
 struct Ray   {};

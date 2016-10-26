@@ -1,11 +1,13 @@
 #pragma once
-
+#include "shapes.h"
 struct CollisionData1D
 {
-	bool  result;
 	float penetrationDepth;
 	float collisionNormal;
-	float MTV;
+
+
+	bool  result() const;
+	float MTV() const;
 };
 
 
@@ -13,13 +15,31 @@ CollisionData1D collisionDetection1D(float Amin, float Amax,
 								 	 float Bmin, float Bmax);
 
  
+struct SweptCollisionData1D
+{
+	float entryTime, exitTime;
+	float collisionNormal;
+
+	bool result() const;
+};
+
+//CollisionData1D sweptDetection1D(float Amin, float Amax, float Avel,
+//								 float Bmin, float Bmax, float Bvel);
+SweptCollisionData1D sweptDetection1D(float Amin, float Amax, float Avel,
+									  float Bmin, float Bmax, float Bvel);
 
 
 
+struct collisionData
+{
+	float penetrationDepth;
+	vec2 collisionNormal;
 
+	bool result() const;
+	vec2 MTV() const;
 
+};
 
-
-
+collisionData boxCollision(const AABB &A, const AABB &B);
 
 
