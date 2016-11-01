@@ -24,6 +24,11 @@ bool operator==(const Circle & A, const Circle & B)
 	return A.pos == B.pos && fequals(A.rad, B.rad);
 }
 
+Plane operator==(const Plane & A, const Plane & B)
+{
+	return Plane();
+}
+
 
 vec2 AABB::min() const
 {
@@ -61,4 +66,15 @@ AABB operator*(const mat3 & T, const AABB & box)
 	//retval.pos = (T * vec3{ A.pos.x,A.pos.y,1 }).xy;
 	//retval.he = (T * vec3{ A.he.x,A.he.y,0 }).xy;
 	return retval;
+}
+
+Plane operator*(const mat3 & T, const Plane & P)
+{
+	Plane retval;
+	retval.pos = 
+				(T * vec3{ P.pos.x, P.pos.y, 1 }).xy;
+
+	retval.dir = 
+				(T * vec3{ P.dir.x, P.dir.y, 1 }).xy;
+	return Plane();
 }

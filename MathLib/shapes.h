@@ -9,6 +9,7 @@ struct Circle
 };
 Circle operator*(const mat3 &T, const Circle &C);
 bool operator==(const Circle &A, const Circle &B);
+Plane operator==(const Plane &A, const Plane &B);
 
 
 struct AABB  
@@ -21,12 +22,15 @@ struct AABB
 };
 AABB operator*(const mat3 &T, const AABB &box);
 
-struct Plane {};
+struct Plane 
+{
+	vec2 pos, dir;
+};
 struct Ray   {};
 struct Hull  {};
 
 
-AABB   operator*(const mat3 &T, const AABB   &B);
+AABB   operator*(const mat3 &T, const AABB   & box);
 Plane  operator*(const mat3 &T, const Plane  &P);
 Ray	   operator*(const mat3 &T, const Ray    &R);
 Hull   operator*(const mat3 &T, const Hull   &H);

@@ -37,6 +37,9 @@ vec2 perp(const vec2 &v);
 float angle(const vec2 &v);
 vec2 fromAngle(float a);
 
+vec2 min(const vec2 &A, const vec2 &B);
+
+vec2 max(const vec2 & A, const vec2 & B);
 
 /////////////////////////////////////
 /////////////////////////////////////
