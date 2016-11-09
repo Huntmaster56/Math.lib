@@ -78,3 +78,23 @@ Plane operator*(const mat3 & T, const Plane & P)
 				(T * vec3{ P.dir.x, P.dir.y, 1 }).xy;
 	return Plane();
 }
+
+Hull::Hull(const vec2 * a_vertices, unsigned a_size)
+{
+	siz = a_size;
+
+	for (int i = 0; i < size && i < 16; ++i)
+	{
+		vertices[i] = a_vertices[i];
+		normals[i] = -perp(normal(a_vertices[(i + 1) % size]
+								- a_vertices[i]));
+	}
+}
+
+Hull::Hull() { size = 0; }
+
+
+
+
+
+
