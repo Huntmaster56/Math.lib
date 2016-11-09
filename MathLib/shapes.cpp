@@ -79,9 +79,24 @@ Plane operator*(const mat3 & T, const Plane & P)
 	return Plane();
 }
 
+
+
+Hull operator*(const mat3 & T, const Hull & H)
+{
+	Hull retval;
+	retval.size = H.size;
+	for (int i = 0; i < H.size; ++i)
+	{
+		retval.vertices[i] = (T * vec3{ H.vertices[i].x, H.vertices[i].y, 1 }).xy;
+
+		retval.normals[i] = (T * vec3{ H.normals[i].x, H.normals[i].y, 0 }).xy;
+	}
+	return retval;
+}
+
 Hull::Hull(const vec2 * a_vertices, unsigned a_size)
 {
-	siz = a_size;
+	size = a_size;
 
 	for (int i = 0; i < size && i < 16; ++i)
 	{
@@ -92,9 +107,4 @@ Hull::Hull(const vec2 * a_vertices, unsigned a_size)
 }
 
 Hull::Hull() { size = 0; }
-
-
-
-
-
 
