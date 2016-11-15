@@ -52,3 +52,7 @@ vec2 hermitSpline(const vec2 start, const vec2 s_tan, const vec2 end, const vec2
 vec2 cardinalSpline(const vec2 start, const vec2 mid, const vec2 end, const vec2 tightness, float alpha);
 
 vec2 catRoomSpline(const vec2 start, const vec2 mid, const vec2 end, float alpha);
+
+vec2 project(const vec2 & I, const vec2 & N);
+
+vec2 reflect(const vec2 & I, const vec2 & N);

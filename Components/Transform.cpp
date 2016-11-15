@@ -1,5 +1,6 @@
 #include "Transform.h"
 #include "sfwdraw.h"
+#include "shapeDraw.h"
 
 Transform::Transform(float x, float y, float w, float h, float a)
 {
@@ -13,9 +14,7 @@ Transform::Transform(float x, float y, float w, float h, float a)
 
 	m_parent = nullptr;
 }
-
-
-using namespace sfw;
+//using namespace sfw;
 //Transform::Transform() : facing(0), position({ 0,0 }), scale({28,8})
 //{
 //		//position.x = 0;
@@ -23,13 +22,11 @@ using namespace sfw;
 //		//scale.x = 28;
 //		//scale.y = 8;
 //}
-
 //Transform::Transform(float x, float y, float w, float h, float a)
 //{
 //	position.x = x;
 //	position.y = y;
 //}
-
 vec2 Transform::getUp() const
 {
 	return -perp(getDirection());
@@ -91,12 +88,13 @@ void Transform::debugDraw(const mat3 &T) const
 	sfw::drawCircle(pos.x, pos.y, 12, 12, RED);
 	sfw::drawLine(pos.x, pos.y, right.x, right.y, GREEN);
 
-	vec2 dirEnd = m_position + getDirection() * m_scale.x * 8;
-	vec2 upEnd = m_position - perp(getDirection()) * m_scale.y * 6;
 
 	vec3 sgp = m_parent ? T * m_parent->getGlobalTransform()[2] : pos;
 	sfw::drawLine(pos.x, pos.y, up.x, up.y, BLUE);
 
+	//vec2 dirEnd = m_position + getDirection() * m_scale.x * 8;
+	//vec2 upEnd = m_position - perp(getDirection()) * m_scale.y * 6;
+	//drawCircle(L * Circle{ 0, 0, 1 }, 0x888888FF);
 	//if (getKey(KEY_UP))
 	//{
 	//	m_position -= getDirection() * 5;

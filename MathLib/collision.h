@@ -28,8 +28,6 @@ struct SweptCollisionData1D
 SweptCollisionData1D sweptDetection1D(float Amin, float Amax, float Avel,
 									  float Bmin, float Bmax, float Bvel);
 
-
-
 struct collisionData
 {
 	float penetrationDepth;
@@ -58,3 +56,8 @@ collisionData planeBoxCollision(const Plane &P, const AABB &B);
 
 CollisionDataSwept planeBoxCollisionSwept(const Plane & P, const vec2 &Pvel,
 	const AABB & B, const vec2 & Bvel);
+
+collisionData HullCollision(const Hull &A, const Hull &B);
+
+
+
