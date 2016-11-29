@@ -24,8 +24,8 @@ void SpacechipController::update(SpaceshipLocomotive & loco)
 	hInput -= sfw::getKey('D');
 
 	float vInput = 0.0f;
-	vInput += sfw::getKey('S');
-	vInput -= sfw::getKey('W');
+	vInput -= sfw::getKey('S');
+	vInput += sfw::getKey('W');
 
 	float bInput = sfw::getKey(' ');
 	
