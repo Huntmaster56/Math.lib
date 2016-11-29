@@ -7,7 +7,9 @@ class SpaceshipLocomotive
 	float vertThrust;
 	float horzThrust;
 	float stopAction;
+	float boost;
 
+	float boostPower;
 	float breakPower;
 	float turnSpeed;
 	float maxSpeed;
@@ -20,6 +22,7 @@ public:
 	void doTurn(float value);
 
 	void doStop(float value);
+	void doBoost(float value);
 
 	void update(const Transform &trans, Rigidbody &rigidbody);
 };

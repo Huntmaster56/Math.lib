@@ -1,6 +1,9 @@
 #include "Collider.h"
 #include "shapedraw.h"
 #include <cmath>
+Collider::Collider()
+{
+}
 Collider::Collider(const vec2 * verts, int size)
 				: hull(verts,size)
 {
@@ -45,7 +48,6 @@ void Collider::DebugDraw(const mat3 & T,
 	drawHull(glob * hull, 0x888888ff);
 	
 	
-	//drawAABB(T * trans.getGlobalTransform() * box, 0x888888ff);
 }
 
 collisionData ColliderCollision(const Transform & AT, const Collider & AC, const Transform & BT, const Collider & BC)
@@ -61,9 +63,56 @@ collisionData ColliderCollision(const Transform & AT, const Collider & AC, const
 
 	return retval;
 }
-collisionData DynamicResolution(Transform & AT, )
-collisionData results = ColliderCollision(AT, AC, BT, BC);
-if (results.penetrationDepth >= 0)
+
+
+collisionData StaticResolution(Transform & AT, Rigidbody & AR, const Collider & AC,
+	const Transform & BT, const Collider & BC,
+	float bounciness)
 {
-	vec2 MTV = results.penetrationDepth
+	collisionData results = ColliderCollision(AT, AC, BT, BC);
+	if (results.penetrationDepth >= 0)
+	{
+		vec2 MTV = results.penetrationDepth * results.collisionNormal;
+		AT.m_position -= MTV;
+
+		AR.velocity = reflect(AR.velocity, results.collisionNormal) * bounciness;
+	}
+
+	return results;
+}
+
+collisionData DynamicResolution(Transform & AT, Rigidbody & AR, const Collider & AC,
+	Transform & BT, Rigidbody & BR, const Collider & BC, float bounciness)
+{
+	collisionData results = ColliderCollision(AT, AC, BT, BC);
+	if (results.penetrationDepth >= 0)
+	{
+		vec2 MTV = results.penetrationDepth * results.collisionNormal;
+
+
+		float am = magnitude(AR.mass * AR.velocity); 
+		float bm = magnitude(BR.mass * BR.velocity); 
+		float cm = am + bm;							  
+
+		AT.m_position -= MTV * (1 - am / cm); 
+		BT.m_position += MTV * (1 - bm / cm); 
+
+		vec2  A = AR.velocity;		
+		float P = AR.mass;			
+		vec2  X;					
+
+		vec2  B = BR.velocity;		
+		float Q = BR.mass;			
+		vec2  Y;					
+
+		float E = bounciness;		
+
+
+		X = (A*P + B*Q + -E*(A - B)*Q) / (Q + P);
+		Y = E*(A - B) + X;
+
+		AR.velocity = X;
+		BR.velocity = Y;
+	}
+	return results;
 }

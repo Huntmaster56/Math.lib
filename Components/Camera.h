@@ -9,5 +9,5 @@ public:
 
 	Camera();
 	mat3 getCameraMatrix() const;
-	void Update(float deltaTime, GameState & gs);
+	void Update(float deltaTime, class GameState & gs);
 };

@@ -13,10 +13,10 @@ void drawAABB(const AABB & box, unsigned color)
 	vec2 C = vec2{ box.max().x, box.min().y };
 	vec2 D = vec2{ box.min().x, box.min().y };
 
-	sfw::drawLine(A.x, A.y, B.x, B.y, color);
-	sfw::drawLine(B.x, B.y, C.x, C.y, color);
-	sfw::drawLine(C.x, C.y, D.x, D.y, color);
-	sfw::drawLine(D.x, D.y, A.x, A.y, color);
+	sfw::drawLine(A.x, A.y, B.x, B.y, RED);
+	sfw::drawLine(B.x, B.y, C.x, C.y, BLUE);
+	sfw::drawLine(C.x, C.y, D.x, D.y, RED);
+	sfw::drawLine(D.x, D.y, A.x, A.y, BLUE);
 }
 
 void drawPlane(const Plane & P, unsigned color)
@@ -42,6 +42,7 @@ void drawHull(const Hull &H, unsigned color)
 	{
 		sfw::drawLine(H.vertices[i].x, H.vertices[i].y,
 					  H.vertices[(i + 1) % H.size].x,
-					  H.vertices[(i + 1) % H.size].y, color);
+					  H.vertices[(i + 1) % H.size].y, RED);
 	}
 }
+

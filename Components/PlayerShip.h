@@ -10,11 +10,12 @@ class GameState;
 
 class PlayerShip
 {
-	Transform transform;
-	Collider collider;
-	Rigidbody rigidbody;
-	SpacechipController controller;
-	SpaceshipLocomotive locomotion;
+public:
+	Transform				transform;
+	Collider				collider;
+	Rigidbody				rigidbody;
+	SpacechipController		controller;
+	SpaceshipLocomotive		locomotion;
 
 	PlayerShip();
 

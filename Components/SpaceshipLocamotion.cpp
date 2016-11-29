@@ -7,6 +7,7 @@ SpaceshipLocomotive::SpaceshipLocomotive()
 	vertThrust = 0.0f;
 	horzThrust = 0.0f;
 	breakPower = 4.0f;
+	boostPower = 10.0f;
 	
 	turnSpeed = 4.0f;
 	speed = 300.0f;
@@ -33,6 +34,11 @@ void SpaceshipLocomotive::doStop(float value)
 	stopAction += value;
 }
 
+void SpaceshipLocomotive::doBoost(float value)
+{
+	boost *= value;
+}
+
 void SpaceshipLocomotive::update(const Transform &trans, Rigidbody &rigidbody)
 {
 //	doThrust();
@@ -46,7 +52,7 @@ void SpaceshipLocomotive::update(const Transform &trans, Rigidbody &rigidbody)
 	rigidbody.addForce(-rigidbody.velocity * breakPower * stopAction);
 	rigidbody.addTorque(-rigidbody.angularVelocity * breakPower * stopAction);
 
-	horzThrust = vertThrust = stopAction = 0;
+	horzThrust = vertThrust = stopAction = boost = 0;
 
 	//rigidbody.acceleration.x = horzThrust * speed;
 	//rigidbody.acceleration.y = vertThrust * speed;

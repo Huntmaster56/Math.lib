@@ -53,6 +53,16 @@ vec2 operator-=( vec2 & lhs, const vec2 & rhs)
 	return lhs = lhs + rhs;
 }
 
+vec2 operator*=(vec2 & lhs, float rhs)
+{
+	return lhs = lhs * rhs;
+}
+
+vec2 operator/=(vec2 & lhs, float rhs)
+{
+	return lhs = lhs / rhs;
+}
+
 float magnitude(const vec2 &v)
 {
 	return (sqrt((v.x*v.x) + (v.y*v.y)));
