@@ -2,39 +2,56 @@
 #include "shapedraw.h"
 #include <cmath>
 Collider::Collider() {}
-Collider::Collider(const vec2 * verts, int size) : hull(verts,size)
+//Collider::Collider(const vec2 * verts, int size) : hull(verts,size)
+//{
+//	int maxX = -INFINITY;
+//	int minX =  INFINITY;
+//	int maxY = -INFINITY;
+//	int minY =  INFINITY;
+//
+//	for (int i = 0; i < size; i++)
+//	{
+//		if (verts[i].x < minX)
+//		{
+//			minX = verts[i].x;
+//		}
+//		if (verts[i].x > maxX)
+//		{
+//			maxX = verts[i].x;
+//		}
+//		if (verts[i].y < minY)
+//		{
+//			minY = verts[i].y;
+//		}
+//		if (verts[i].y > maxY)
+//		{
+//			maxY = verts[i].y;
+//		}
+//	}
+//	vec2 min{ minX, minY };
+//	vec2 max{ maxX, maxY };
+//
+//	box.pos = (min + max) / 2;
+//	box.he =  (max - min) / 2;
+//
+//}
+
+Collider::Collider(const vec2 * verts, int size)
+	: hull(verts, size)
 {
-	int maxX = -INFINITY;
-	int minX =  INFINITY;
-	int maxY = -INFINITY;
-	int minY =  INFINITY;
+	vec2 boxMin = { INFINITY,  INFINITY },
+		boxMax = { -INFINITY, -INFINITY };
 
-	for (int i = 0; i < size; i++)
+	for (int i = 0; i < size; ++i)
 	{
-		if (verts[i].x < minX)
-		{
-			minX = verts[i].x;
-		}
-		if (verts[i].x > maxX)
-		{
-			maxX = verts[i].x;
-		}
-		if (verts[i].y < minY)
-		{
-			minY = verts[i].y;
-		}
-		if (verts[i].y > maxY)
-		{
-			maxY = verts[i].y;
-		}
+		boxMin = min(boxMin, verts[i]);
+		boxMax = max(boxMax, verts[i]);
 	}
-	vec2 min{ minX, minY };
-	vec2 max{ maxX, maxY };
 
-	box.pos = (min + max) / 2;
-	box.he =  (max - min) / 2;
-
+	box.pos = (boxMin + boxMax) / 2;
+	box.he = (boxMax - boxMin) / 2;
 }
+
 
 void Collider::DebugDraw(const mat3 & T, const Transform & trans)
 {
@@ -56,12 +73,13 @@ collisionData ColliderCollision(const Transform & AT, const Collider & AC, const
 	if (retval.penetrationDepth >= 0)
 		retval = HullCollision(AT.getGlobalTransform() * AC.hull,
 							   BT.getGlobalTransform() * BC.hull);
-
+							   
 	return retval;
 }
 
 
-collisionData StaticResolution(Transform & AT, Rigidbody & AR, const Collider & AC, const Transform & BT, const Collider & BC, float bounciness)
+collisionData StaticResolution(Transform & AT, Rigidbody & AR, const Collider & AC,	
+						 const Transform & BT, const Collider & BC, float bounciness)
 {
 	collisionData results = ColliderCollision(AT, AC, BT, BC);
 	if (results.penetrationDepth >= 0)
@@ -70,12 +88,15 @@ collisionData StaticResolution(Transform & AT, Rigidbody & AR, const Collider & 
 		AT.m_position -= MTV;
 
 		AR.velocity = reflect(AR.velocity, results.collisionNormal) * bounciness;
+
+		
 	}
 
 	return results;
 }
 
-collisionData DynamicResolution(Transform & AT, Rigidbody & AR, const Collider & AC, Transform & BT, Rigidbody & BR, const Collider & BC, float bounciness)
+collisionData DynamicResolution(Transform & AT, Rigidbody & AR, const Collider & AC,
+								Transform & BT, Rigidbody & BR, const Collider & BC, float bounciness)
 {
 	collisionData results = ColliderCollision(AT, AC, BT, BC);
 	if (results.penetrationDepth >= 0)

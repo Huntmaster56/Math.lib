@@ -64,12 +64,12 @@ collisionData boxCollision(const AABB & A, const AABB & B)
 	if (XCD.penetrationDepth < YCD.penetrationDepth)
 	{
 		retval.penetrationDepth = XCD.penetrationDepth;
-		retval.collisionNormal = vec2{1,0} * XCD.penetrationDepth;
+		retval.collisionNormal = vec2{1,0} * XCD.collisionNormal;
 	}
 	else
 	{
 		retval.penetrationDepth = YCD.penetrationDepth;
-		retval.collisionNormal = vec2{ 1,0 } * YCD.penetrationDepth;
+		retval.collisionNormal = vec2{ 0,1 } * YCD.collisionNormal;
 
 	}
 	return retval;

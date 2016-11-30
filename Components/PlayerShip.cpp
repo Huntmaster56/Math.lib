@@ -17,6 +17,7 @@ void PlayerShip::Update(float deltaTime, GameState & gs)
 
 	rigidbody.integrate(transform, deltaTime);
 
+	rigidbody.addForce(vec2{ 0,-100 }); // gravity
 
 }
 

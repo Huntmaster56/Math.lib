@@ -21,6 +21,8 @@ void main()
 
 	game.Play();
 
+
+
 	while (sfw::stepContext())
 	{
 		float dt = sfw::getDeltaTime();

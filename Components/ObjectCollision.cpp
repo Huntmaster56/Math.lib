@@ -22,5 +22,5 @@ void AsteroidCollision(Floor & as1, Floor & as2)
 void FloorCollision(PlayerShip & player, Floor & floor)
 {
 	StaticResolution(player.transform, player.rigidbody, player.collider,
-								   floor.transform, floor.collider, 1);
+								   floor.transform, floor.collider, 1.25);
 }
