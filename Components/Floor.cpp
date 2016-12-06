@@ -13,8 +13,8 @@ Floor::Floor()
 
 Spring::Spring()
 {
-	vec2 hullVrts[] = { { 0,0 },{ 20,0 },{ 20,10 },{ 0,10 } };
-	collider = Collider(hullVrts, 4);
+	vec2 hullVrts[] = { { 0,0 },{ 30,0 },{ 30,20 },{ 0,20 } };
+	collider = Collider(hullVrts, 2);
 
 	transform.m_scale = vec2{ 10,10 };
 	rigidbody.drag = 0.0f;
@@ -40,6 +40,4 @@ void Floor::Update(float deltaTime, GameState & gs)
 void Floor::Draw(const mat3 & camera)
 {
 	collider.DebugDraw(camera, transform);
-	//transform.debugDraw(camera);
-	//rigidbody.debugDraw(camera, transform);
 }
