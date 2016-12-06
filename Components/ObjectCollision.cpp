@@ -28,11 +28,11 @@ void AsteroidCollision2(Spring & as1, Spring & as2)
 void FloorCollision(PlayerShip & player, Floor & floor)
 {
 	StaticResolution(player.transform, player.rigidbody, player.collider,
-								   floor.transform, floor.collider, 1.25);
+								   floor.transform, floor.collider, 1.5);
 }
 
 void SpringCollision(PlayerShip & player, Spring & spring)
 {
 	StaticResolution(player.transform, player.rigidbody, player.collider,
-		spring.transform, spring.collider, 1.25);
+		spring.transform, spring.collider, 2.5);
 }
